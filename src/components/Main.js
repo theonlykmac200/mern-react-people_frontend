@@ -8,7 +8,7 @@ import Show from "../pages/Show"
 function Main(props) {
   const [people, setPeople] = useState([])
 
-  const URL ="http://localhost:3001/people/"
+  const URL ="https://peoplemernbackend.herokuapp.com/people/"
 
   const getPeople = async() => {
     const response = await fetch(URL)
