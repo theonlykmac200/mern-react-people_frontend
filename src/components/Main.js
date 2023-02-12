@@ -8,8 +8,7 @@ import Show from "../pages/Show"
 function Main(props) {
   const [people, setPeople] = useState([])
 
-  const URL ="https://peoplemernbackend.herokuapp.com/people/"
-
+  const URL ="http://127.0.0.1:8000/people/"
   const getPeople = async() => {
     const response = await fetch(URL)
     const data = await response.json()
@@ -29,19 +28,26 @@ function Main(props) {
   }
 
   const updatePeople = async (person, id) => {
-   
-    await fetch(URL + id, {
+    await fetch(URL + id + '/', {
       method: "PUT",
       headers: {
         "Content-Type": "Application/json",
       },
       body: JSON.stringify(person),
     })
-    
-    getPeople()
-  }
-
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    getPeople();
+  };
+  
+  
   const deletePeople = async(id) => {
+    console.log(id)
     await fetch(URL + id, {
       method: "DELETE",
     })
